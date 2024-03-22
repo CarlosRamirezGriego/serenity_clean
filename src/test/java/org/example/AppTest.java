@@ -14,7 +14,7 @@ public class AppTest {
     @Test
     public void firstMethod(){
         WebDriver chrome = new ChromeDriver();
-        chrome.get("https://www.expansion.serenity-dojo.com/");
+        chrome.get("https://www.google.com/");
         Assertions.assertThat("a").isEqualTo("a");
     }
 
