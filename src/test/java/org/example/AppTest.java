@@ -1,6 +1,7 @@
 package org.example;
 
 
+import io.restassured.RestAssured;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
@@ -16,6 +17,7 @@ public class AppTest {
         WebDriver chrome = new ChromeDriver();
         chrome.get("https://www.google.com/");
         Assertions.assertThat("a").isEqualTo("a");
+        RestAssured.baseURI = "https://pokeapi.co/api/v2/pokemon/25";
     }
 
 }
