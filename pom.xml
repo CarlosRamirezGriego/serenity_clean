@@ -20,7 +20,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <encoding>UTF-8</encoding>
     <tags></tags>
-    <parallel.tests>4</parallel.tests>
+    <parallel.tests></parallel.tests>
     <webdriver.base.url></webdriver.base.url>
   </properties>
   <dependencies>
@@ -76,6 +76,17 @@
       <groupId>org.assertj</groupId>
       <artifactId>assertj-core</artifactId>
       <version>${assertj.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.seleniumhq.selenium</groupId>
+      <artifactId>selenium-java</artifactId>
+      <version>4.15.0</version>
+    </dependency>
+    <dependency>
+      <groupId>io.appium</groupId>
+      <artifactId>java-client</artifactId>
+      <version>7.5.1</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
