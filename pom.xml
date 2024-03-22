@@ -19,6 +19,8 @@
     <logback.version>1.2.10</logback.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <encoding>UTF-8</encoding>
+    <selenium.version>4.18.1</selenium.version>
+    <restassured.version>5.4.0</restassured.version>
   </properties>
   <dependencies>
     <dependency>
@@ -41,6 +43,12 @@
     </dependency>
     <dependency>
       <groupId>net.serenity-bdd</groupId>
+      <artifactId>serenity-cucumber</artifactId>
+      <version>${serenity.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>net.serenity-bdd</groupId>
       <artifactId>serenity-ensure</artifactId>
       <version>${serenity.version}</version>
       <scope>test</scope>
@@ -50,6 +58,11 @@
       <artifactId>serenity-screenplay-webdriver</artifactId>
       <version>${serenity.version}</version>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>net.serenity-bdd</groupId>
+      <artifactId>serenity-rest-assured</artifactId>
+      <version>${serenity.version}</version>
     </dependency>
     <dependency>
       <groupId>ch.qos.logback</groupId>
@@ -78,12 +91,12 @@
     <dependency>
       <groupId>org.seleniumhq.selenium</groupId>
       <artifactId>selenium-java</artifactId>
-      <version>4.18.1</version>
+      <version>${selenium.version}</version>
     </dependency>
     <dependency>
       <groupId>io.rest-assured</groupId>
       <artifactId>rest-assured</artifactId>
-      <version>5.4.0</version>
+      <version>${restassured.version}</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
