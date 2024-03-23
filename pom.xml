@@ -21,6 +21,7 @@
     <encoding>UTF-8</encoding>
     <selenium.version>4.18.1</selenium.version>
     <restassured.version>5.4.0</restassured.version>
+    <cucumber.version>7.16.0</cucumber.version>
   </properties>
   <dependencies>
     <dependency>
@@ -45,7 +46,6 @@
       <groupId>net.serenity-bdd</groupId>
       <artifactId>serenity-cucumber</artifactId>
       <version>${serenity.version}</version>
-      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>net.serenity-bdd</groupId>
@@ -99,8 +99,64 @@
       <version>${restassured.version}</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.13.2</version>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.platform</groupId>
+      <artifactId>junit-platform-suite-api</artifactId>
+      <version>1.10.1</version>
+      <scope>test</scope>
+    </dependency>
+      <dependency>
+          <groupId>net.serenity-bdd</groupId>
+          <artifactId>serenity-junit</artifactId>
+          <version>4.1.0</version>
+          <scope>test</scope>
+      </dependency>
+    <dependency>
+      <groupId>io.cucumber</groupId>
+      <artifactId>cucumber-junit</artifactId>
+      <version>7.15.0</version>
+    </dependency>
+    <dependency>
+      <groupId>io.cucumber</groupId>
+      <artifactId>cucumber-junit-platform-engine</artifactId>
+      <version>${cucumber.version}</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
+
+
   <build>
+  <plugins>
+
+    <plugin>
+      <groupId>net.serenity-bdd.maven.plugins</groupId>
+      <artifactId>serenity-maven-plugin</artifactId>
+      <version>${serenity.version}</version>
+      <configuration>
+      </configuration>
+      <executions>
+        <execution>
+          <id>check-feature-files</id>
+          <phase>process-test-resources</phase>
+          <goals>
+            <goal>check-gherkin</goal>
+          </goals>
+        </execution>
+        <execution>
+          <id>serenity-reports</id>
+          <phase>post-integration-test</phase>
+          <goals>
+            <goal>aggregate</goal>
+          </goals>
+        </execution>
+      </executions>
+    </plugin>
+  </plugins>
 
 
     <testResources>
