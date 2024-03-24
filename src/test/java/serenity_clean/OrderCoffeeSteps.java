@@ -4,26 +4,44 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
+
 public class OrderCoffeeSteps {
-    @Given("Cathy is {int} meters from the coffee shop")
-    public void cathy_is_meters_from_the_coffee_shop(Integer int1) {
-        // Write code here that turns the phrase above into concrete actions
-        System.out.println("a");
+    Order order = new Order();
+    Customer cathy = new Customer();
+    Barista barry = new Barista("Barry");
+
+    @Given("^Cathy is (\\d+) meters from the coffee shop$")
+    public void cathy_is_meters_from_the_coffee_shop(int distanceInMeters) {
+        cathy = new Customer("Cathy", distanceInMeters);
+
     }
-    @When("Cathy orders a large cappuccino")
-    public void cathy_orders_a_large_cappuccino() {
-        // Write code here that turns the phrase above into concrete actions
-        System.out.println("a");
+    @When("^Cathy orders a (.*)$")
+    public void cathy_orders_a(String orderName) {
+        cathy.makeOrder(orderName, 1);
     }
-    @Then("Barry should receive an order")
+    @Then("^Barry should receive an order$")
     public void barry_should_receive_an_order() {
-        // Write code here that turns the phrase above into concrete actions
-        System.out.println("a");
+        barry.getLatestOrderInQueue();
     }
-    @Then("Barry should know that the coffee is Urgent")
+    @Then("^Barry should know that the coffee is Urgent$")
     public void barry_should_know_that_the_coffee_is_urgent() {
-        // Write code here that turns the phrase above into concrete actions
-        System.out.println("a");
+        assertThat(barry.checkCurrentOrderInformation().returnOrderUrgencyLevel(),  equalTo(UrgencyLevel.URGENT));
     }
+
+    @Then("^Barry should know that the coffee is Low Priority$")
+    public void barry_should_know_that_the_coffee_is_low_priority() {
+        assertThat(barry.checkCurrentOrderInformation().returnOrderUrgencyLevel(),  equalTo(UrgencyLevel.LOWPRIORITY));
+    }
+
+    @Then("^Barry should know that the coffee has regular Priority$")
+    public void barry_should_know_that_the_coffee_has_regular_priority() {
+        assertThat(barry.checkCurrentOrderInformation().returnOrderUrgencyLevel(),  equalTo(UrgencyLevel.NORMAL));
+    }
+
 
 }
