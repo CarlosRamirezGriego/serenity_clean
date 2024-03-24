@@ -36,7 +36,7 @@ public class Customer {
     public void makeOrder(String itemName, int amount)
     {
         List<Item> items = new ArrayList<>();
-        Item item = new Item(itemName, 1);
+        Item item = new Item(itemName, amount);
         items.add(item);
         this.makeOrder(items);
     }
