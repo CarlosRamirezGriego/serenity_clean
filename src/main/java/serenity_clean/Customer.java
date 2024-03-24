@@ -28,7 +28,6 @@ public class Customer {
     public void makeOrder(List<Item> items)
     {
         Order order = new Order(items, this);
-        System.out.println(this.getCustomerDistance());
         CoffeeShop.addOrderToQueue(order);
     }
 
