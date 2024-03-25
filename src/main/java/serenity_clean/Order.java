@@ -24,7 +24,7 @@ public class Order {
             System.out.println("Urgency set to LOW");
             this.urgency = UrgencyLevel.LOW;
         }
-        else if(c.getCustomerDistance() >= 200)
+        else if(c.getCustomerDistance() >= 200 || c.getCustomerDistance() == -1)
         {
             System.out.println("Urgency set to NORMAL");
             this.urgency = UrgencyLevel.NORMAL;
@@ -40,6 +40,32 @@ public class Order {
     public UrgencyLevel returnOrderUrgencyLevel()
     {
         return this.urgency;
+    }
+
+
+    public Customer getCustomer()
+    {
+        return this.customer;
+    }
+
+
+    public void updateUrgencyByETA(int eta)
+    {
+        if(eta >= 10)
+        {
+            System.out.println("Urgency set to LOW");
+            this.urgency = UrgencyLevel.LOW;
+        }
+        else if(eta >= 5)
+        {
+            System.out.println("Urgency set to NORMAL");
+            this.urgency = UrgencyLevel.NORMAL;
+        }
+        else
+        {
+            System.out.println("Urgency set to URGENT");
+            this.urgency = UrgencyLevel.URGENT;
+        }
     }
 
 }
