@@ -32,10 +32,10 @@ public class Customer {
     }
 
 
-    public void makeOrder(String itemName, int amount)
+    public void makeOrder(String size, String itemName, int amount)
     {
         List<Item> items = new ArrayList<>();
-        Item item = new Item(itemName, amount);
+        Item item = new Item(size, itemName, amount);
         items.add(item);
         this.makeOrder(items);
     }

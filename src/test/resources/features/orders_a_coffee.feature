@@ -5,21 +5,21 @@ Feature: Order a coffee
   I want to be able to order my coffee in advance
 
   Scenario: Buyer orders a coffee when they are close to the coffee shop
-    Given Cathy is 100 meters from the coffee shop
-    When Cathy orders a large cappuccino
+    Given Cathy is 1 meter from the coffee shop
+    When Cathy orders a Large cappuccino
     Then Barry should receive an order
-    And Barry should know that the coffee is Urgent
+    And Barry should know that the coffee priority is Urgent
 
 
   Scenario: Buyer orders a coffee when they are not so close to the coffee shop
     Given Cathy is 250 meters from the coffee shop
-    When Cathy orders a large cappuccino
+    When Cathy orders a Large cappuccino
     Then Barry should receive an order
-    And Barry should know that the coffee has regular Priority
+    And Barry should know that the coffee priority is Normal
 
 
   Scenario: Buyer orders a coffee when they are far from the coffee shop
     Given Cathy is 550 meters from the coffee shop
-    When Cathy orders a large cappuccino
+    When Cathy orders a Large cappuccino
     Then Barry should receive an order
-    And Barry should know that the coffee is Low Priority
+    And Barry should know that the coffee priority is Low
