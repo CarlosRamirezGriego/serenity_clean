@@ -32,5 +32,18 @@ public class CoffeeShop {
     }
 
 
+    public static void updateUserETA(String name, int eta)
+    {
+        for(Order o : orders)
+        {
+            if(o.getCustomer().getCustomerName().equals(name))
+            {
+                o.updateUrgencyByETA(eta);
+                break;
+            }
+        }
+    }
+
+
 
 }

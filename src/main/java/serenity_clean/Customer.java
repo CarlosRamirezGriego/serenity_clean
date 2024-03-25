@@ -10,7 +10,11 @@ public class Customer {
 
     public Customer()
     {
+    }
 
+    public Customer(String name)
+    {
+        this.customerName = name;
     }
 
     public Customer(String name, int distance)
@@ -38,5 +42,10 @@ public class Customer {
         Item item = new Item(size, itemName, amount);
         items.add(item);
         this.makeOrder(items);
+    }
+
+    public String getCustomerName()
+    {
+        return this.customerName;
     }
 }
