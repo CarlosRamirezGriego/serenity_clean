@@ -44,6 +44,16 @@ public class CoffeeShop {
         }
     }
 
-
+    public static Receipt getCustomerReceipt(String name)
+    {
+        for(Order o : orders)
+        {
+            if(o.getCustomer().getCustomerName().equals(name))
+            {
+                return o.GenerateReceipt();
+            }
+        }
+        return null;
+    }
 
 }

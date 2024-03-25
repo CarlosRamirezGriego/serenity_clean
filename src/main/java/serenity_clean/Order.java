@@ -68,4 +68,12 @@ public class Order {
         }
     }
 
+
+    public Receipt GenerateReceipt()
+    {
+        double fee = 0.18;
+        Receipt r = new Receipt(this.items, fee);
+        return r;
+    }
+
 }
