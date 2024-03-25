@@ -32,7 +32,7 @@ public class CoffeeShop {
     }
 
 
-    public static void updateUserETA(String name, int eta)
+    public static void updateOrdersByCustomerETA(String name, int eta)
     {
         for(Order o : orders)
         {
