@@ -10,6 +10,14 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class OrderCoffeeSteps {
 
+    /*
+    * This code can be found in this Repository
+    * URL: https://github.com/CarlosRamirezGriego/serenity_clean
+    * Branch: caffeinateme
+    * File: src/test/java_serenity_clean/OrderCoffeeSteps.java
+     */
+
+
     @Steps(shared = true)
 
     Customer cathy = new Customer("Cathy");
@@ -42,7 +50,7 @@ public class OrderCoffeeSteps {
 
     @When("^(.*) is (\\d+) (?:minute|minutes) away$")
     public void customer_minutes_away(String name, int eta) {
-        CoffeeShop.updateUserETA(name, eta);
+        CoffeeShop.updateOrdersByCustomerETA(name, eta);
     }
 
 
