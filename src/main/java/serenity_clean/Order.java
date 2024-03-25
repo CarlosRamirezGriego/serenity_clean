@@ -22,7 +22,7 @@ public class Order {
         if(c.getCustomerDistance() >= 500)
         {
             System.out.println("Urgency set to LOW");
-            this.urgency = UrgencyLevel.LOWPRIORITY;
+            this.urgency = UrgencyLevel.LOW;
         }
         else if(c.getCustomerDistance() >= 200)
         {
