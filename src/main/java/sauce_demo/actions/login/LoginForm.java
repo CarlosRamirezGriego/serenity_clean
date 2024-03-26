@@ -1,4 +1,4 @@
-package sauce_demo.model;
+package sauce_demo.actions.login;
 
 import org.openqa.selenium.By;
 
