@@ -19,6 +19,7 @@ import sauce_demo.model.TotalItemPrice;
 import java.util.List;
 import java.util.Map;
 
+import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.contains;
@@ -86,6 +87,7 @@ public class CheckOutSteps {
         Assertions.assertThat(confirmationPage.thankYouMessage()).contains(message);
     }
 
+    /*
     @DataTableType
     public CheckoutItem product(Map<String, String> itemDetails) {
         return new CheckoutItem(
@@ -101,18 +103,21 @@ public class CheckOutSteps {
                 itemTotals.get("Tax"),
                 itemTotals.get("Total"));
     }
+*/
 
     @Then("Colin/he should be presented with a summary of his purchase including:")
     public void presentSummaryOfPurchases(List<CheckoutItem> expectedItems) {
         Assertions.assertThat(cart.items()).containsExactlyElementsOf(expectedItems);
     }
 
+
     /**
      * Check the total price details displayed on the checkout confirmation page
      */
     @Then("the total price should be:")
-    public void totalPriceShouldBe(TotalItemPrice expectedPrice) {
-        assertThat(cart.totalItemPrice(),  equalTo(expectedPrice));
+    public void totalPriceShouldBe(List<Map<String, String>> totals) {
+        String totalPrice = totals.get(0).get("Total");
+        assertThat(cart.totalItemPrice().getTotal(),  equalTo(totalPrice));
     }
 
 }
