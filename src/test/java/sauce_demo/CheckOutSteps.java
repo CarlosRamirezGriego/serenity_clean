@@ -87,33 +87,11 @@ public class CheckOutSteps {
         Assertions.assertThat(confirmationPage.thankYouMessage()).contains(message);
     }
 
-    /*
-    @DataTableType
-    public CheckoutItem product(Map<String, String> itemDetails) {
-        return new CheckoutItem(
-                Integer.parseInt(itemDetails.get("Qty")),
-                itemDetails.get("Description"),
-                itemDetails.get("Price"));
-    }
-
-    @DataTableType
-    public TotalItemPrice itemPriceTotal(Map<String, String> itemTotals) {
-        return new TotalItemPrice(
-                itemTotals.get("Item total"),
-                itemTotals.get("Tax"),
-                itemTotals.get("Total"));
-    }
-*/
-
     @Then("Colin/he should be presented with a summary of his purchase including:")
     public void presentSummaryOfPurchases(List<CheckoutItem> expectedItems) {
         Assertions.assertThat(cart.items()).containsExactlyElementsOf(expectedItems);
     }
 
-
-    /**
-     * Check the total price details displayed on the checkout confirmation page
-     */
     @Then("the total price should be:")
     public void totalPriceShouldBe(List<Map<String, String>> totals) {
         String totalPrice = totals.get(0).get("Total");
