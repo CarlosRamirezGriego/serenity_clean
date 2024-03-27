@@ -54,4 +54,10 @@ public class LoginSteps {
         assertThat(login.errorMessage(),  containsString(errorMessage));
     }
 
+    @Given("Colin/he has logged onto the application")
+    public void aRegisteredUser() {
+        login.openTheLoginPage();
+        login.withValidCredentials();
+    }
+
 }
