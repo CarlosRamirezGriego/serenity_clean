@@ -11,9 +11,9 @@ Feature: Completing a purchase
       When he provides the following personal details:
         | First Name   | Last Name   | Zip/Post Code   |
         | <First Name> | <Last Name> | <Zip/Post Code> |
-      Then he should be presented with the error message <Error Message>
+      Then he should be presented with a checkout error message: <Message>
       Examples: Some examples
-        | First Name | Last Name | Zip/Post Code | Error Message                  |
+        | First Name | Last Name | Zip/Post Code | Message                  |
         |            | Collector | ABC-123       | Error: First Name is required  |
         | Colin      |           | ABC-123       | Error: Last Name is required   |
         | Colin      | Collector |               | Error: Postal Code is required |

@@ -16,6 +16,7 @@ import sauce_demo.model.CheckoutItem;
 import sauce_demo.model.CustomerDetails;
 import sauce_demo.model.TotalItemPrice;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -44,6 +45,8 @@ public class CheckOutSteps {
     @Steps
     ConfirmationPage confirmationPage;
 
+    public static List<String> itemsAlreadyAdded = new ArrayList<>();
+
     /**
      * The present tense tells us this is something Colin is doing now
      */
@@ -57,7 +60,11 @@ public class CheckOutSteps {
      */
     @Given("Colin/he has selected an item and checked out his cart")
     public void colinHasCheckedOutHisCart() {
-        inventoryActions.addToCart("Sauce Labs Backpack");
+        if(!itemsAlreadyAdded.contains("Sauce Labs Backpack"))
+        {
+            itemsAlreadyAdded.add("Sauce Labs Backpack");
+            inventoryActions.addToCart("Sauce Labs Backpack");
+        }
         navigate.toTheShoppingCart();
         cartActions.startCheckout();
     }
@@ -71,6 +78,13 @@ public class CheckOutSteps {
         cartActions.startCheckout();
         checkout.enterCustomerDetails(CustomerDetails.about("Colin"));
     }
+
+
+    @Then("he should be presented with a checkout error message: {}")
+    public void shouldBePresentedWithACheckoutErrorMessageOf(String message) {
+        assertThat(checkout.getError(),  equalTo(message));
+    }
+
 
     @When("Colin/he checks out the following items:")
     public void checksOutItems(List<CheckoutItem> items) {
@@ -87,9 +101,18 @@ public class CheckOutSteps {
         Assertions.assertThat(confirmationPage.thankYouMessage()).contains(message);
     }
 
+    @DataTableType
+    public CheckoutItem product(Map<String, String> itemDetails) {
+        return new CheckoutItem(
+                Integer.parseInt(itemDetails.get("Qty")),
+                itemDetails.get("Description"),
+                itemDetails.get("Price"));
+    }
+
+
     @Then("Colin/he should be presented with a summary of his purchase including:")
     public void presentSummaryOfPurchases(List<CheckoutItem> expectedItems) {
-        Assertions.assertThat(cart.items()).containsExactlyElementsOf(expectedItems);
+        Assertions.assertThat(cart.returnItemsAsList()).containsExactlyElementsOf(CartItems.returnItemsAsList(expectedItems));
     }
 
     @Then("the total price should be:")

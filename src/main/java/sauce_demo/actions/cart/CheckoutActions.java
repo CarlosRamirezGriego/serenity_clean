@@ -4,6 +4,7 @@ import net.serenitybdd.annotations.Step;
 import net.serenitybdd.core.steps.UIInteractionSteps;
 import net.serenitybdd.screenplay.ui.Button;
 import net.serenitybdd.screenplay.ui.InputField;
+import org.openqa.selenium.By;
 import sauce_demo.model.CustomerDetails;
 
 public class CheckoutActions extends UIInteractionSteps {
@@ -20,6 +21,12 @@ public class CheckoutActions extends UIInteractionSteps {
             $(InputField.withPlaceholder("Zip/Postal Code")).sendKeys(customerDetails.getPostCode());
         }
         $(Button.withText("Continue")).click();
+    }
+
+
+    public String getError()
+    {
+        return find(By.cssSelector("div.error-message-container")).getText();
     }
 
     @Step("Confirm the order")

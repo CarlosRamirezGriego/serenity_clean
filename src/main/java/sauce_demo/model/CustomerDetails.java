@@ -9,7 +9,14 @@ public class CustomerDetails {
 
     public CustomerDetails(@JsonProperty("firstName") String firstName, @JsonProperty("lastName") String lastName, @JsonProperty("postCode") String postCode) {
         this.firstName = firstName;
-        this.lastName = "Mac"+lastName;
+        if(lastName == "" || lastName == null)
+        {
+            this.lastName = null;
+        }
+        else
+        {
+            this.lastName = "Mac"+lastName;
+        }
         this.postCode = postCode;
     }
 
