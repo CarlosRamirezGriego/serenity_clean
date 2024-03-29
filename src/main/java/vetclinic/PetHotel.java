@@ -12,6 +12,12 @@ public class PetHotel {
         pets.add(pet);
     }
 
+
+    public void checkOutPet(Pet pet)
+    {
+        pets.removeIf(p -> p.equals(pet));
+    }
+
     public List<Pet> getPets()
     {
         return this.pets;

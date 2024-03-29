@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static org.hamcrest.CoreMatchers.hasItem;
+import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 @RunWith(SerenityRunner.class)
@@ -25,6 +26,23 @@ public class BookAPetIntoHotel {
         );
 
         assertThat(petHotel.getPets(), hasItem(ginger));
+    }
+
+
+    @Test
+    public void petra_checks_her_cat_out_of_the_hotel()
+    {
+        // Given
+        Actor petra = Actor.named("Petra the pet owner");
+        Pet ginger = Pet.Cat().named("Ginger");
+        PetHotel petHotel = new PetHotel();
+        CheckIn.aPet(ginger).into(petHotel);
+
+        petra.attemptsTo(
+                CheckOut.aPet(ginger).from(petHotel)
+        );
+
+        assertThat(petHotel.getPets(), not(hasItem(ginger)));
     }
 
 }
