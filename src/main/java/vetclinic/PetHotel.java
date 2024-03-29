@@ -11,4 +11,9 @@ public class PetHotel {
     {
         pets.add(pet);
     }
+
+    public List<Pet> getPets()
+    {
+        return this.pets;
+    }
 }

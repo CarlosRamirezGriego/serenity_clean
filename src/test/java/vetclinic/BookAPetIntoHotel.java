@@ -6,6 +6,9 @@ import net.serenitybdd.screenplay.Actor;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import static org.hamcrest.CoreMatchers.hasItem;
+import static org.hamcrest.MatcherAssert.assertThat;
+
 @RunWith(SerenityRunner.class)
 public class BookAPetIntoHotel {
 
@@ -21,14 +24,7 @@ public class BookAPetIntoHotel {
                 CheckIn.aPet(ginger).into(petHotel)
         );
 
-        //When
-        //petra.attemptsTo(
-        //        new CheckIn(ginger, petHotel)
-        //);
-
-        //Then
-
-        //Assert
+        assertThat(petHotel.getPets(), hasItem(ginger));
     }
 
 }
