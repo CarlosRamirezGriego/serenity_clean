@@ -6,6 +6,7 @@ import net.serenitybdd.screenplay.Actor;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -25,7 +26,8 @@ public class BookAPetIntoHotel {
                 CheckIn.aPet(ginger).into(petHotel)
         );
 
-        assertThat(petHotel.getPets(), hasItem(ginger));
+        //assertThat(petHotel.getPets(), hasItem(ginger));
+        petra.should(seeThat(TheRegisteredGuests.in(petHotel), hasItem(ginger)));
     }
 
 
@@ -42,7 +44,23 @@ public class BookAPetIntoHotel {
                 CheckOut.aPet(ginger).from(petHotel)
         );
 
-        assertThat(petHotel.getPets(), not(hasItem(ginger)));
+        //assertThat(petHotel.getPets(), not(hasItem(ginger)));
+        petra.should(seeThat(TheRegisteredGuests.in(petHotel), not(hasItem(ginger))));
+    }
+
+    @Test
+    public void petra_books_her_pet_cat_into_the_hotel_that_is_already_full() {
+        Actor petra = Actor.named("Petra the pet owner");
+        Actor harry = Actor.named("Harry the hotel manager");
+        Pet ginger = Pet.Cat().named("Ginger");
+        PetHotel petHotel = APetHotel.called("Pet Hotel California").withResidents(20);
+        CheckIn.aPet(ginger).into(petHotel);
+
+        petra.attemptsTo(
+                CheckIn.aPet(ginger).into(petHotel)
+        );
+
+        harry.should(seeThat(TheGuestsOnTheWaitingList.in(petHotel), hasItem(ginger)));
     }
 
 }
