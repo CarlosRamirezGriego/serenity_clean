@@ -1,4 +1,4 @@
-package trains;
+package trains.ui;
 
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Question;

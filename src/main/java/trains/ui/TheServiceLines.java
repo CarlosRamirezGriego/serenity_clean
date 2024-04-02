@@ -1,4 +1,4 @@
-package trains;
+package trains.ui;
 
 import net.serenitybdd.screenplay.Question;
 import net.serenitybdd.screenplay.questions.targets.TheTarget;
