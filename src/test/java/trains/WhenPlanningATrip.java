@@ -32,6 +32,8 @@ public class WhenPlanningATrip {
     public void setTheStage()
     {
         carrie.can(BrowseTheWeb.with(browser));
+        Open.browserOn().the(TFLHomePage.class);
+        Click.on(CookiesDialog.ACCEPT_ALL_COOKIES);
     }
 
 
@@ -55,12 +57,10 @@ public class WhenPlanningATrip {
     public void should_be_able_to_search_for_station_details()
     {
         carrie.attemptsTo(
-                Open.browserOn().the(TFLHomePage.class),
-                Click.on(CookiesDialog.ACCEPT_ALL_COOKIES),
-                Enter.theValue("Waterloo").into(TFLHomePage.SEARCH).thenHit(Keys.ENTER)
+                Search.forStation("Waterloo")
         );
         carrie.should(seeThat(
-                TheTarget.textOf(SearchResultsPage.SEARCH_RESULTS_HEADING), equalTo("Search: Waterloo")
+                SearchResults.heading(), equalTo("Search: Waterloo"), equalTo("Search: Waterloo")
         ));
     }
 
@@ -68,8 +68,6 @@ public class WhenPlanningATrip {
     public void should_list_all_relevant_station_information()
     {
         carrie.attemptsTo(
-                Open.browserOn().the(TFLHomePage.class),
-                Click.on(CookiesDialog.ACCEPT_ALL_COOKIES),
                 Enter.theValue("Jubilee").into(TFLHomePage.SEARCH).thenHit(Keys.ENTER)
         );
         carrie.should(seeThat(
@@ -81,12 +79,10 @@ public class WhenPlanningATrip {
     public void should_see_status_updates()
     {
         carrie.attemptsTo(
-                Open.browserOn().the(TFLHomePage.class),
-                Click.on(CookiesDialog.ACCEPT_ALL_COOKIES),
-                Click.on(MenuBar.STATUS_UPDATES.menuOption())
+                SelectMenu.option(MenuBar.STATUS_UPDATES)
         );
         carrie.should(seeThat(
-                TheTarget.textValuesOf(StatusUpdatePage.SERVICE_LINES), hasItems("Bakerloo", "Circle", "Central")
+                TheServiceLines.displayed() , hasItems("Bakerloo", "Circle", "Central")
         ));
     }
 
@@ -95,8 +91,6 @@ public class WhenPlanningATrip {
     public void should_be_able_to_contact_tfl()
     {
         carrie.attemptsTo(
-                Open.browserOn().the(TFLHomePage.class),
-                Click.on(CookiesDialog.ACCEPT_ALL_COOKIES),
                 Click.on(MenuBar.HELP_AND_CONTACT.menuOption()),
                 Click.on(HelpAndContacts.AboutOyster.TFLApp)
         );
