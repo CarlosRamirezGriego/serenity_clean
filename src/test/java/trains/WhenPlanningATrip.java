@@ -7,7 +7,6 @@ import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
 import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.actions.Enter;
 import net.serenitybdd.screenplay.actions.Open;
-import net.serenitybdd.screenplay.actions.SelectFromOptions;
 import net.serenitybdd.screenplay.questions.page.TheWebPage;
 import net.serenitybdd.screenplay.questions.targets.TheTarget;
 import org.junit.Before;
@@ -32,8 +31,11 @@ public class WhenPlanningATrip {
     public void setTheStage()
     {
         carrie.can(BrowseTheWeb.with(browser));
-        Open.browserOn().the(TFLHomePage.class);
-        Click.on(CookiesDialog.ACCEPT_ALL_COOKIES);
+
+        carrie.attemptsTo(
+                Open.browserOn().the(TFLHomePage.class),
+                Click.on(CookiesDialog.ACCEPT_ALL_COOKIES)
+        );
     }
 
 
@@ -91,21 +93,18 @@ public class WhenPlanningATrip {
     public void should_be_able_to_contact_tfl()
     {
         carrie.attemptsTo(
-                Click.on(MenuBar.HELP_AND_CONTACT.menuOption()),
+                SelectMenu.option(MenuBar.HELP_AND_CONTACT),
                 Click.on(HelpAndContacts.AboutOyster.TFLApp)
         );
 
         carrie.attemptsTo(
-                SelectFromOptions.byVisibleText("Mrs").from(ContactForm.TITLE.formOption()),
-                Enter.theValue("Sara-Jane").into(ContactForm.FIRST_NAME.formOption()),
-                Enter.theValue("Smith").into(ContactForm.LAST_NAME.formOption())
-
+                EnterContactDetails.forCustomer("Mrs","Sara-Jane", "Smith")
         );
 
         carrie.should(
-                seeThat(TheTarget.selectedValueOf(ContactForm.TITLE.formOption()), equalTo("Mrs")),
-                seeThat(TheTarget.valueOf(ContactForm.FIRST_NAME.formOption()), equalTo("Sara-Jane")),
-                seeThat(TheTarget.valueOf(ContactForm.LAST_NAME.formOption()), equalTo("Smith"))
+                seeThat(TheContactDetails.title(), equalTo("Mrs")),
+                seeThat(TheContactDetails.firstName(), equalTo("Sara-Jane")),
+                seeThat(TheContactDetails.lastName(), equalTo("Smith"))
         );
     }
 
